@@ -3,44 +3,57 @@ package STRIVERS.BINARY_SEARCH.Binary_search_1D_Arrays;
 import java.util.Arrays;
 
 public class Floor_and_Ceil_in_Sorted_Array {
-    public static int floor(int[]A,int K){
+
+    public static int[] bruteforce(int[] A, int K) {
         int n = A.length;
-        int start = 0,end = n-1,ans = -1;
-        while(start<=end){
-            int mid = start+(end-start)/2;
+        int floor = -1;
+        for (int i = 0; i < n; i++) {
+            if (A[i] <= K) {
+                floor = A[i];
+            } else {
+                break;
+            }
+        }
+        int ceil = -1;
+        for (int i = 0; i < n; i++) {
+            if (A[i] >= K) {
+                ceil = A[i];
+                break;
+            }
+        }
+        return new int[]{floor, ceil};
+    }
+
+    public static int[] solve(int[] A, int K) {
+        int n = A.length;
+        int start = 0, end = n - 1, floor = -1;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
             if(A[mid]<=K){
-                ans = A[mid];
+                floor = A[mid];
                 start = mid+1;
             }else{
                 end = mid-1;
             }
         }
-        return ans;
-    }
-    public static int ceil(int[]A,int K){
-        int n = A.length;
-        int start = 0,end = n-1,ans = -1;
-        while(start<=end){
-            int mid = start+(end-start) / 2;
+        int ceil = -1;
+        start=0;end = n-1;
+        while (start<=end){
+            int mid = start+(end-start)/2;
             if(A[mid]>=K){
-                ans = A[mid];
+                ceil = A[mid];
                 end = mid-1;
             }else{
                 start = mid+1;
             }
         }
-        return ans;
-    }
-    public static int[] solve(int[]A,int K){
-        int floor = floor(A,K);
-        int ceil = ceil(A,K);
         return new int[] {floor,ceil};
     }
+
     public static void main(String[] args) {
-        int[]A = {3, 4, 4, 7, 8, 10};
+        int[] A = {3, 4, 4, 7, 8, 10};
         int K = 5;
-        System.out.println(floor(A,K));
-        System.out.println(ceil(A,K));
+        System.out.println(Arrays.toString(bruteforce(A, K)));
         System.out.println(Arrays.toString(solve(A,K)));
     }
 }
