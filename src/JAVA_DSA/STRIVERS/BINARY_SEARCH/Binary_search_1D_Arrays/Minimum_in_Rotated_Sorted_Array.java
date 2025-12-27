@@ -1,13 +1,19 @@
 package STRIVERS.BINARY_SEARCH.Binary_search_1D_Arrays;
 
 public class Minimum_in_Rotated_Sorted_Array {
-    public static int brute(int[] A) {
+    //Bruteforce
+    public static int bruteforce(int[] A) {
         int n = A.length;
-        int ans = Integer.MAX_VALUE;
-        for (int i = 0; i < n; i++) {
-            ans = Math.min(ans, A[i]);
+        int index = -1;
+        for (int i = 1; i < n; i++) {
+            if (A[i - 1] > A[i]) {
+                index = i;
+                System.out.println(index);
+                return A[i];
+            }
         }
-        return ans;
+
+        return A[0];
     }
 
     public static int solve(int[] A) {
@@ -15,11 +21,15 @@ public class Minimum_in_Rotated_Sorted_Array {
         int start = 0, end = n - 1, ans = Integer.MAX_VALUE;
         while (start <= end) {
             int mid = start + (end - start) / 2;
-            if(A[start]<=A[mid]){
-                ans = Math.min(ans,A[start]);
+            if(A[start] <= A[mid]){
+                if(A[start] < ans){
+                    ans = A[start];
+                }
                 start = mid+1;
             }else{
-                ans = Math.min(ans,A[mid]);
+                if(A[mid] < ans){
+                    ans = A[mid];
+                }
                 end = mid - 1;
             }
         }
@@ -30,6 +40,7 @@ public class Minimum_in_Rotated_Sorted_Array {
         int[] A = {4, 5, 6, 7, 0, 1, 2, 3};
         int[] B = {3, 1, 2};
         int[] C = {3, 4, 5, 1, 2};
+        System.out.println(bruteforce(A));
         System.out.println(solve(A));
     }
 }

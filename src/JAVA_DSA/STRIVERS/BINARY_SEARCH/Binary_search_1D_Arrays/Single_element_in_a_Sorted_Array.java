@@ -18,17 +18,15 @@ public class Single_element_in_a_Sorted_Array {
         return -1;
     }
 
-    //Better
     public static int better(int[] A) {
         int n = A.length;
-        int K = 0;
+        int a = 0;
         for (int i = 0; i < n; i++) {
-            K = K ^ A[i];
+            a = a ^ A[i];
         }
-        return K;
+        return a;
     }
 
-    //Optimal
     public static int safeGet(int[] A, int i) {
         int n = A.length;
         if (i >= 0 && i < n) {
@@ -42,16 +40,16 @@ public class Single_element_in_a_Sorted_Array {
         int start = 0, end = n - 1;
         while (start <= end) {
             int mid = start + (end - start) / 2;
-            if (A[mid] != safeGet(A, mid - 1) && A[mid] != safeGet(A, mid + 1)) {
+            if(A[mid]!=safeGet(A,mid-1)&&A[mid]!=safeGet(A,mid+1)){
                 return A[mid];
             }
-            if (A[mid] == A[mid - 1]) {
-                mid = mid - 1;
+            if(A[mid]==safeGet(A,mid-1)){
+                mid = mid-1;
             }
-            if (mid % 2 == 0) {
-                start = mid + 2;
-            } else {
-                end = mid - 1;
+            if(mid % 2==0){
+                start = mid+2;
+            }else{
+                end = mid-1;
             }
         }
         return -1;

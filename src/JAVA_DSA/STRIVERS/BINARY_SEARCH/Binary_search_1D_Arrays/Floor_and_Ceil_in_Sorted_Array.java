@@ -26,34 +26,33 @@ public class Floor_and_Ceil_in_Sorted_Array {
 
     public static int[] solve(int[] A, int K) {
         int n = A.length;
-        int start = 0, end = n - 1, floor = -1;
+        int start = 0, end = n - 1, floor = -1, ceil = -1;
         while (start <= end) {
             int mid = start + (end - start) / 2;
-            if(A[mid]<=K){
+            if(A[mid] <=K){
                 floor = A[mid];
                 start = mid+1;
             }else{
                 end = mid-1;
             }
         }
-        int ceil = -1;
-        start=0;end = n-1;
+        start = 0;end = n-1;
         while (start<=end){
-            int mid = start+(end-start)/2;
-            if(A[mid]>=K){
+            int mid = start + (end - start) / 2;
+            if(A[mid] >=K){
                 ceil = A[mid];
                 end = mid-1;
             }else{
-                start = mid+1;
+                start = mid + 1;
             }
         }
-        return new int[] {floor,ceil};
+        return new int[]{floor,ceil};
     }
 
     public static void main(String[] args) {
         int[] A = {3, 4, 4, 7, 8, 10};
         int K = 5;
         System.out.println(Arrays.toString(bruteforce(A, K)));
-        System.out.println(Arrays.toString(solve(A,K)));
+        System.out.println(Arrays.toString(solve(A, K)));
     }
 }

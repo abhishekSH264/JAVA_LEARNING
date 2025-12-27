@@ -1,5 +1,7 @@
 package STRIVERS.BINARY_SEARCH.Binary_search_1D_Arrays;
 
+import java.util.stream.StreamSupport;
+
 public class Search_Element_in_a_Rotated_Sorted_Array {
     //Bruteforce
     public static int bruteforce(int[] A, int K) {
@@ -28,9 +30,9 @@ public class Search_Element_in_a_Rotated_Sorted_Array {
                 }
             } else {
                 if (A[mid] <= K && K <= A[end]) {
-                    start = mid + 1;
-                } else {
-                    end = mid - 1;
+                    start = mid+1;
+                }else{
+                    end = mid-1;
                 }
             }
         }
@@ -43,7 +45,7 @@ public class Search_Element_in_a_Rotated_Sorted_Array {
         int[] B = {5, 1, 3};
         int J = 3;
         System.out.println(bruteforce(A, K));
-        System.out.println(solve(A,K));
-        System.out.println(solve(B,J));
+        System.out.println(solve(A, K));
+        System.out.println(solve(B, J));
     }
 }
