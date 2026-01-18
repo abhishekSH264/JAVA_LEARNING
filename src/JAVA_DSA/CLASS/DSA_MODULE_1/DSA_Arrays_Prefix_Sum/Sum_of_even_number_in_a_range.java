@@ -3,16 +3,16 @@ package CLASS.DSA_MODULE_1.DSA_Arrays_Prefix_Sum;
 import java.util.Arrays;
 
 public class Sum_of_even_number_in_a_range {
-    public static int[] bruteforce(int[] A, int[][] Q) {
-        int n = A.length;
-        int m = Q.length;
 
+    public static int[] bruteforce(int[] A, int[][] Q) {
+        int m = Q.length;
         int[] arr = new int[m];
+
         for (int i = 0; i < m; i++) {
-            int l = Q[i][0];
-            int r = Q[i][1];
+            int start = Q[i][0];
+            int end = Q[i][1];
             int sum = 0;
-            for (int j = l; j <= r; j++) {
+            for (int j = start; j <= end; j++) {
                 if (A[j] % 2 == 0) {
                     sum += A[j];
                 }
@@ -25,6 +25,7 @@ public class Sum_of_even_number_in_a_range {
     public static int[] solve(int[] A, int[][] Q) {
         int n = A.length;
         int m = Q.length;
+
         int[] psum = new int[n];
         if (A[0] % 2 == 0) {
             psum[0] = A[0];
@@ -40,17 +41,16 @@ public class Sum_of_even_number_in_a_range {
         }
         int[] arr = new int[m];
         for (int i = 0; i < m; i++) {
-            int l = Q[i][0];
-            int r = Q[i][1];
-            if(l==0){
-                arr[i] = psum[r];
+            int start = Q[i][0];
+            int end = Q[i][1];
+            if(start==0){
+                arr[i] = psum[end];
             }else{
-                arr[i] = psum[r] - psum[l-1];
+                arr[i] = psum[end] - psum[start-1];
             }
         }
         return arr;
     }
-
     public static void main(String[] args) {
         int[] A = {3, 2, 8, 5, 10, 7};
         int[][] B = {{0, 3}, {1, 4}, {2, 5}};

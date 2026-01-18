@@ -1,29 +1,35 @@
 package CLASS.DSA_MODULE_1.DSA_Arrays_Carry_Forward_Subarrays;
 
 public class Special_Subsequences_AG {
-    public static int bruteforce(String s) {
+    public static long bruteforce(String s) {
         int n = s.length();
-        int count = 0;
-        for (int i = 0; i < n; i++) {
-            if (s.charAt(i) == 'A') {
+        int pair = 0;
+        for(int i = 0; i < n; i++){
+            char ch = s.charAt(i);
+            if (ch == 'A') {
+                int count = 0;
                 for (int j = i + 1; j < n; j++) {
-                    if(s.charAt(j)=='G'){
+                    if (s.charAt(j) == 'G') {
                         count++;
                     }
                 }
+                pair += count;
             }
         }
-        return count;
+        return pair;
     }
-    public static int solve(String s){
+
+    public static long solve(String s) {
         int n = s.length();
+        long pair = 0;
         int count = 0;
-        int pair = 0;
-        for(int i = 0; i < n; i++){
-            if(s.charAt(i)=='A'){
+
+        for (int i = 0; i < n; i++) {
+            char ch = s.charAt(i);
+            if(ch=='A'){
                 count++;
             }
-            if(s.charAt(i)=='G'){
+            if(ch=='G'){
                 pair+=count;
             }
         }

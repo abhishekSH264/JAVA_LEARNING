@@ -4,14 +4,15 @@ import java.util.Arrays;
 
 public class Sum_of_even_index_in_a_range {
     public static int[] bruteforce(int[] A, int[][] Q) {
-        int n = A.length;
         int m = Q.length;
         int[] arr = new int[m];
+
         for (int i = 0; i < m; i++) {
-            int l = Q[i][0];
-            int r = Q[i][1];
+            int start = Q[i][0];
+            int end = Q[i][1];
             int sum = 0;
-            for (int j = l; j <= r; j++) {
+
+            for (int j = start; j <= end; j++) {
                 if (j % 2 == 0) {
                     sum += A[j];
                 }
@@ -36,23 +37,23 @@ public class Sum_of_even_index_in_a_range {
         }
         int[] arr = new int[m];
         for (int i = 0; i < m; i++) {
-            int l = Q[i][0];
-            int r = Q[i][1];
+            int start = Q[i][0];
+            int end = Q[i][1];
 
-            if (l == 0){
-                arr[i] = psum[r];
-            }else{
-                arr[i] = psum[r] - psum[l-1];
+            if (start == 0) {
+                arr[i] = psum[end];
+            } else {
+                arr[i] = psum[end] - psum[start - 1];
             }
         }
         return arr;
-    }
 
+    }
     public static void main(String[] args) {
-        //0  1  2  3  4
+        //         0  1  2  3  4
         int[] A = {2, 4, 6, 8, 10};
         int[][] B = {{0, 2}, {1, 4}, {2, 4}};
-//        System.out.println(Arrays.toString(bruteforce(A, B)));
+        System.out.println(Arrays.toString(bruteforce(A, B)));
         System.out.println(Arrays.toString(solve(A, B)));
     }
 }

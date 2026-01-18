@@ -1,17 +1,37 @@
 package CLASS.DSA_MODULE_3.DSA_Searching_1_Binary_Search_on_Array;
 
 public class Matrix_Search {
-    public static boolean brute(int[][] A, int K) {
+    //Brute Force TC - O(n) Sc - O(1);
+    public static int bruteForce(int[][] A, int K) {
         int n = A.length;
         for (int i = 0; i < n; i++) {
             int m = A[i].length;
             for (int j = 0; j < m; j++) {
                 if (A[i][j] == K) {
-                    return true;
+                    return 1;
                 }
             }
         }
-        return false;
+        return 0;
+    }
+
+    //Better 1
+    public static int stairCase(int[][] A, int K) {
+        int n = A.length;
+        int m = A[0].length;
+        int i = 0;
+        int j = m - 1;
+        while (i < n && j >= 0) {
+            int ele = A[i][j];
+            if (ele == K) {
+                return 1;
+            } else if (ele < K) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+        return 0;
     }
 
     public static boolean binarySearch(int[] A, int K) {
@@ -30,30 +50,14 @@ public class Matrix_Search {
         return false;
     }
 
-    public static boolean better(int[][] A, int K) {
+    public static int usingBinarySearch(int[][] A, int K) {
         int n = A.length;
         for (int i = 0; i < n; i++) {
             int m = A[i].length;
-            if (K >= A[i][0] && K <= A[i][m - 1]) {
-                return binarySearch(A[i], K);
-            }
-        }
-        return false;
-    }
-    public static int solve(int[][]A,int K){
-        int n = A.length;
-        int m = A[0].length;
-        int start = 0,end = n*m-1;
-        while (start<=end){
-            int mid = start+(end-start)/2;
-            int row = mid/m;
-            int col = mid%m;
-            if(A[row][col]==K){
-                return 1;
-            } else if (A[row][col]<K) {
-                start = mid+1;
-            }else{
-                end = mid-1;
+            if(K>=A[i][0] && K<=A[i][m-1]){
+                if(binarySearch(A[i],K)){
+                    return 1;
+                }
             }
         }
         return 0;
@@ -63,8 +67,9 @@ public class Matrix_Search {
                 {10, 11, 16, 20},
                 {23, 30, 34, 50}};
         int K = 3;
-        System.out.println(brute(A, K));
-        System.out.println(better(A, K));
-        System.out.println(solve(A,K));
+        System.out.println(bruteForce(A, K));
+        System.out.println(stairCase(A, K));
+        System.out.println(usingBinarySearch(A,K));
+
     }
 }

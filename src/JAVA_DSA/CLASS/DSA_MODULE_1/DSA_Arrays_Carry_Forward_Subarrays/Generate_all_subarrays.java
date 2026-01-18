@@ -7,18 +7,19 @@ public class Generate_all_subarrays {
         int n = A.length;
         int length = n * (n + 1) / 2;
         int[][] arr = new int[length][];
-        int k = 0;
-        for (int s = 0; s < n; s++) {
-            for (int e = s; e < n; e++) {
-                int l = e - s + 1;
+        int row = 0;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i; j < n; j++) {
+                int l = j - i + 1;
                 int[] al = new int[l];
-                int j = 0;
-                for (int i = s; i <= e; i++) {
-                    al[j] = A[i];
-                    j++;
+                int col = 0;
+                for (int k = i; k <= j; k++) {
+                    al[col] = A[k];
+                    col++;
                 }
-                arr[k] = al;
-                k++;
+                arr[row] = al;
+                row++;
             }
         }
         return arr;

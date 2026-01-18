@@ -8,16 +8,14 @@ public class Leaders_in_an_array {
         int n = A.length;
         ArrayList<Integer> al = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            int max = A[i];
-            boolean ismax = true;
+            boolean isGreater = true;
             for (int j = i + 1; j < n; j++) {
-                if (A[j] > max) {
-                    ismax = false;
-                    break;
+                if (A[j] > A[i]) {
+                    isGreater = false;
                 }
             }
-            if (ismax) {
-                al.add(max);
+            if (isGreater) {
+                al.add(A[i]);
             }
         }
         int[] arr = new int[al.size()];
@@ -29,23 +27,22 @@ public class Leaders_in_an_array {
 
     public static int[] solve(int[] A) {
         int n = A.length;
-        int max = Integer.MIN_VALUE;
+        int max = -1;
         ArrayList<Integer> al = new ArrayList<>();
         for (int i = n - 1; i >= 0; i--) {
-            if(A[i] >= max){
+            if (A[i] > max) {
                 max = A[i];
                 al.add(max);
             }
         }
         int[] arr = new int[al.size()];
         int j = 0;
-        for(int i = al.size()-1;i >=0; i--){
+        for (int i = al.size()-1; i >=0; i--) {
             arr[j] = al.get(i);
             j++;
         }
         return arr;
     }
-
     public static void main(String[] args) {
         int[] A = {16, 17, 4, 3, 5, 2};
         System.out.println(Arrays.toString(bruteforce(A)));

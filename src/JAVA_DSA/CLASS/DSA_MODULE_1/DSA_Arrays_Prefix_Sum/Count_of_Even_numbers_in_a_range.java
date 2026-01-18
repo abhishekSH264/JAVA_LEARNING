@@ -5,14 +5,15 @@ import java.util.Arrays;
 //Finding the sum of the Even index elements for the Q queries
 public class Count_of_Even_numbers_in_a_range {
     public static int[] bruteforce(int[] A, int[][] Q) {
-        int n = Q.length;
-        int m = A.length;
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++) {
-            int l = Q[i][0];
-            int r = Q[i][1];
+        int m = Q.length;
+        int[] arr = new int[m];
+
+        for(int i = 0; i < m; i++){
+            int start = Q[i][0];
+            int end = Q[i][1];
             int count = 0;
-            for (int j = l; j <= r; j++) {
+
+            for (int j = start; j <= end; j++) {
                 if (A[j] % 2 == 0) {
                     count++;
                 }
@@ -22,9 +23,11 @@ public class Count_of_Even_numbers_in_a_range {
         return arr;
     }
 
+    //using prefixSum
     public static int[] solve(int[] A, int[][] Q) {
         int n = A.length;
         int m = Q.length;
+
         int[] psum = new int[n];
         if (A[0] % 2 == 0) {
             psum[0] = 1;
@@ -33,19 +36,19 @@ public class Count_of_Even_numbers_in_a_range {
         }
         for (int i = 1; i < n; i++) {
             if (A[i] % 2 == 0) {
-                psum[i] = psum[i-1] + 1;
-            }else{
-                psum[i] = psum[i-1];
+                psum[i] = psum[i - 1] + 1;
+            } else {
+                psum[i] = psum[i - 1];
             }
         }
         int[] arr = new int[m];
-        for(int i = 0; i < m; i++){
-            int l = Q[i][0];
-            int r = Q[i][1];
-            if(l==0){
-                arr[i] = psum[r];
+        for (int i = 0; i < m; i++) {
+            int start = Q[i][0];
+            int end = Q[i][1];
+            if (start == 0) {
+                arr[i] = psum[end];
             }else{
-                arr[i] = psum[r] - psum[l-1];
+                arr[i] = psum[end] - psum[start-1];
             }
         }
         return arr;
@@ -57,8 +60,8 @@ public class Count_of_Even_numbers_in_a_range {
         int[] B = {2, 1, 8, 3, 9, 6};
         int[][] C = {{0, 3}, {3, 5}, {1, 3}, {2, 4}};
         System.out.println(Arrays.toString(solve(A,b)));
-//        System.out.println(Arrays.toString(bruteforce(A, b)));
-//        System.out.println(Arrays.toString(bruteforce(B, C)));
+        System.out.println(Arrays.toString(bruteforce(A, b)));
+        System.out.println(Arrays.toString(bruteforce(B, C)));
 
     }
 }

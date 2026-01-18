@@ -1,13 +1,15 @@
 package CLASS.DSA_MODULE_1.DSA_Arrays_Carry_Forward_Subarrays;
 
 public class Counting_Subarrays_Easy {
-    public static int bruteforce(int[] A,int B) {
+
+    public static int solve(int[] A, int B) {
         int n = A.length;
         int count = 0;
-        for (int s = 0; s < n; s++) {
+
+        for (int i = 0; i < n; i++) {
             int sum = 0;
-            for(int e = s; e < n; e++){
-                sum+=A[e];
+            for (int j = i; j < n; j++) {
+                sum+=A[j];
                 if(sum < B){
                     count++;
                 }
@@ -15,10 +17,9 @@ public class Counting_Subarrays_Easy {
         }
         return count;
     }
-
     public static void main(String[] args) {
         int[] A = {2, 5, 6};
         int B = 10;
-        System.out.println(bruteforce(A,B));
+        System.out.println(solve(A,B));
     }
 }

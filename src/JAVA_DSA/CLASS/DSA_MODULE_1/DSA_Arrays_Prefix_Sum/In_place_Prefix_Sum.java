@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class In_place_Prefix_Sum {
     public static int[] solve(int[]A){
         int n = A.length;
-        for(int i=1;i<n;i++){
+        for (int i = 1; i < n; i++) {
             A[i] = A[i-1]+A[i];
         }
         return A;
