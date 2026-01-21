@@ -1,7 +1,5 @@
 package CLASS.DSA_MODULE_3.DSA_Searching_1_Binary_Search_on_Array;
 
-import javax.lang.model.element.AnnotationMirror;
-
 //Consider the Example to understand the Diagram as 1,2,3,4,5,6
 public class Find_a_peak_element {
     public static int bruteforce(int[] A) {
@@ -19,22 +17,20 @@ public class Find_a_peak_element {
         return -1;
     }
 
-    public static int safeGet(int[] A, int i) {
-        int n = A.length;
-        if (i >= 0 && i < n) {
-            return A[i];
-        }
-        return Integer.MIN_VALUE;
-    }
-
     public static int solve(int[] A) {
         int n = A.length;
-        int start = 0, end = n - 1;
-        while(start <= end){
+        if(n==1) return A[0];
+        if (A[0] >= A[1]) {
+            return A[0];
+        } else if (A[n - 1] >= A[n - 2]) {
+            return A[n - 1];
+        }
+        int start = 1, end = n - 2;
+        while (start <= end) {
             int mid = start + (end - start) / 2;
-            if(A[mid] >= safeGet(A,mid-1)&&A[mid] >= safeGet(A,mid+1)){
+            if (A[mid] >= A[mid - 1] && A[mid] >= A[mid + 1]) {
                 return A[mid];
-            }else if(A[mid] > safeGet(A,mid-1)&&A[mid] < safeGet(A,mid+1)){
+            }else if(A[mid] < A[mid+1]){
                 start = mid+1;
             }else{
                 end = mid-1;
