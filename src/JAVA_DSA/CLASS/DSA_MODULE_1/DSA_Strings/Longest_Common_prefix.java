@@ -7,7 +7,7 @@ public class Longest_Common_prefix {
         int n = Math.min(s1.length(), s2.length());
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n; i++) {
-            if(s1.charAt(i)==s2.charAt(i)){
+            if (s1.charAt(i) == s2.charAt(i)) {
                 sb.append(s1.charAt(i));
             }else{
                 break;
@@ -19,20 +19,21 @@ public class Longest_Common_prefix {
     public static String bruteforce(String[] A) {
         int n = A.length;
         String result = A[0];
-        for(int i = 1; i < n; i++){
-            result = common(result,A[i]);
+        for (int i = 1; i < n; i++) {
+            result = common(result, A[i]);
         }
         return result;
     }
-    public static String solve(String[]A){
+
+    public static String solve(String[] A) {
         Arrays.sort(A);
-        int n = A.length;
-        String first = A[0];
-        String last = A[n-1];
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < Math.min(first.length(),last.length());i++){
-            if(first.charAt(i)==last.charAt(i)){
-                sb.append(first.charAt(i));
+        int n = A.length;
+        String s1 = A[0];
+        String s2 = A[n - 1];
+        for (int i = 0; i < Math.min(s1.length(), s2.length()); i++) {
+            if(s1.charAt(i)==s2.charAt(i)){
+                sb.append(s1.charAt(i));
             }else{
                 break;
             }

@@ -5,64 +5,68 @@ import java.util.HashMap;
 public class Majority_Element_n_2 {
     public static int bruteforce(int[]A){
         int n = A.length;
-        for(int i=0;i<n;i++){
-            int count= 0;
-            for(int j=0;j<n;j++){
+        int major = n / 2;
+        for (int i = 0; i < n; i++) {
+            int count = 0;
+            for (int j = 0; j < n; j++) {
                 if(A[j]==A[i]){
                     count++;
                 }
             }
-            if(count>n/2){
+            if (count >= major) {
                 return A[i];
             }
         }
         return -1;
     }
-    public static int better(int[]A){
+
+    public static int better(int[] A) {
         int n = A.length;
-        HashMap<Integer,Integer> hs = new HashMap<>();
-        for(int i=0;i<n;i++){
-            int ele = A[i];
-            hs.put(ele, hs.getOrDefault(ele,0)+1);
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            map.put(A[i], map.getOrDefault(A[i], 0) + 1);
         }
-        //iterating again to check the Frequency
-        for(int i=0;i<n;i++){
-            int ele = A[i];
-            if(hs.get(ele) > n/2){
-                return ele;
+        int major = n / 2;
+        for (int i = 0; i < n; i++) {
+            if (map.get(A[i]) >= major) {
+                return A[i];
             }
         }
         return -1;
     }
-    public static int solve(int[]A){
+
+    public static int solve(int[] A) {
         int n = A.length;
-        int count = 1;
-        int ele = A[0];
-        for(int i=1;i<n;i++){
+        int count = 0;
+        int val = -1;
+        for (int i = 0; i < n; i++) {
             if(count==0){
+                val = A[i];
                 count = 1;
-                ele = A[i];
-            } else if (A[i]==ele) {
-                    count++;
-            }else {
+            }else if(A[i]!=val){
                 count--;
+            }else{
+                count++;
             }
         }
-        int total = 0;
-        for(int i=0;i<n;i++){
-            if(A[i]==ele){
-                total++;
+        count = 0;
+        for(int i = 0 ; i < n; i++){
+            if(A[i]==val){
+                count++;
             }
         }
-        if(total > n/2){
-            return ele;
+        if(count > n/2){
+            return val;
         }
         return -1;
     }
     public static void main(String[] args){
         int[] A = {2,2,3,3,1,2,2};
-        System.out.println(bruteforce(A));
-        System.out.println(better(A));
-        System.out.println(solve(A));
+        int[]B = {7, 0, 0, 1, 7, 7, 2, 7, 7};
+//        System.out.println(bruteforce(A));
+//        System.out.println(better(A));
+//        System.out.println(solve(A));
+
+        System.out.println(solve(B));
     }
 }

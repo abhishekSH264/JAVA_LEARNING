@@ -7,7 +7,9 @@ public class Longest_Palindromic_Substring {
         2.Check if the substring is palindrome
         3.If palindrome then record the max length
      */
-    public static boolean isplaindrome(String s, int i, int j) {
+    public static boolean isPalindrome(String s) {
+        int n = s.length();
+        int i = 0, j = n - 1;
         while (i < j) {
             if (s.charAt(i) != s.charAt(j)) {
                 return false;
@@ -20,24 +22,20 @@ public class Longest_Palindromic_Substring {
 
     public static String bruteforce(String s) {
         int n = s.length();
-        int ans = Integer.MIN_VALUE;
-        int start = -1;
-        int end = -1;
+        int count = 0;
+        String sub = "";
         for (int i = 0; i < n; i++) {
             for (int j = i; j < n; j++) {
-                if (isplaindrome(s, i, j)) {
-                    int length = j - i + 1;
-                    if (length > ans) {
-                        ans = length;
-                        start = i;
-                        end = j;
+                String A = s.substring(i, j + 1);
+                if (isPalindrome(A)) {
+                    if (A.length() > sub.length()) {
+                        sub = A;
                     }
                 }
             }
         }
-        return s.substring(start, end + 1);
+        return sub;
     }
-
     /*
     optimized Steps:
     1.Using the expand function logic
@@ -45,34 +43,38 @@ public class Longest_Palindromic_Substring {
     3.We need to check the palindrome for odd length and even length
     4.for expand function while(i>=0&&j<n&&s.charAt(p1)==s.charAt(p2)) then p1-- and p2++;
      */
-    public static String expand(String s, int p1, int p2, int n) {
-        while (p1 >= 0 && p2 < n && s.charAt(p1) == s.charAt(p2)) {
-            p1--;
-            p2++;
+    public static String expand(String s, int p1, int p2) {
+        int n = s.length();
+        int left = p1;
+        int right = p2;
+        while ((left >= 0 && right < n) && s.charAt(left) == s.charAt(right)) {
+            left--;
+            right++;
         }
-        return s.substring(p1 + 1, p2);
+        return s.substring(left + 1, right);
     }
 
-    public static String solve(String A) {
-        int n = A.length();
-        String s = "";
+    public static String solve(String s) {
+        int n = s.length();
+        String A = "";
         for (int i = 0; i < n; i++) {
-            //for odd length;
-            String s1 = expand(A,i,i,n);
-            //for even length;
-            String s2 = expand(A,i,i+1,n);
-            if(s1.length() > s.length()){
-                s = s1;
+            String s1 = expand(s,i,i);
+            if(s1.length() > A.length()){
+                A = s1;
             }
-            if(s2.length() > s.length()){
-                s = s2;
+            String s2 = expand(s,i,i+1);
+            if(s2.length() > A.length()){
+                A = s2;
             }
         }
-        return s;
+        return A;
     }
 
     public static void main(String[] args) {
         String s = "forgeeksskeegfor";
+        String s1 = "aaaabaaa";
         System.out.println(bruteforce(s));
+        System.out.println(bruteforce(s1));
+        System.out.println(solve(s));
     }
 }

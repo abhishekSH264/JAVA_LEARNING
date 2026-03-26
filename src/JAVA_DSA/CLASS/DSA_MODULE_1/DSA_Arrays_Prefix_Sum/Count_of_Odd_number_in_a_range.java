@@ -3,28 +3,28 @@ package CLASS.DSA_MODULE_1.DSA_Arrays_Prefix_Sum;
 import java.util.Arrays;
 
 public class Count_of_Odd_number_in_a_range {
-    public static int[] bruteforce(int[] A, int[][] Q) {
+    public static int[] bruteforce(int[][] Q, int[] A) {
+        int n = A.length;
         int m = Q.length;
-        int[] arr = new int[m];
-
+        int[] res = new int[m];
         for (int i = 0; i < m; i++) {
             int start = Q[i][0];
             int end = Q[i][1];
             int count = 0;
-
             for (int j = start; j <= end; j++) {
                 if (A[j] % 2 != 0) {
                     count++;
                 }
             }
-            arr[i] = count;
+            res[i] = count;
         }
-        return arr;
+        return res;
     }
 
-    public static int[] solve(int[] A, int[][] Q) {
+    public static int[] solve(int[][] Q, int[] A) {
         int n = A.length;
         int m = Q.length;
+
         int[] psum = new int[n];
         if (A[0] % 2 != 0) {
             psum[0] = 1;
@@ -38,22 +38,22 @@ public class Count_of_Odd_number_in_a_range {
                 psum[i] = psum[i - 1];
             }
         }
-        int[] arr = new int[m];
+        int[] res = new int[m];
         for (int i = 0; i < m; i++) {
             int start = Q[i][0];
             int end = Q[i][1];
-            if (start == 0){
-                arr[i] = psum[end];
+            if(start ==0){
+                res[i] = psum[end];
             }else{
-                arr[i] = psum[end] - psum[start-1];
+                res[i] = psum[end] - psum[start-1];
             }
         }
-        return arr;
+        return res;
     }
     public static void main(String[] args) {
         int[] A = {1, 2, 3, 4, 5};
         int[][] B = {{0, 4}, {1, 3}};
-        System.out.println(Arrays.toString(bruteforce(A, B)));
-        System.out.println(Arrays.toString(solve(A,B)));
+        System.out.println(Arrays.toString(bruteforce(B, A)));
+        System.out.println(Arrays.toString(solve(B,A)));
     }
 }

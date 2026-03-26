@@ -1,19 +1,19 @@
 package CLASS.DSA_MODULE_1.DSA_Arrays_Carry_Forward_Subarrays;
 
 public class Pick_from_both_sides {
-    public static int solve(int[]A,int B){
+    public static long solve(int[]A,int B){
         int n = A.length;
-        int sum = 0;
-        for(int i = 0; i < B; i++){
+        long sum = 0;
+        for(int i = 0 ; i < B; i ++){
             sum+=A[i];
         }
-        int ans = sum;
+        long ans = sum;
         int i = B-1;
         int j = n-1;
         while(i >= 0){
-            sum -= A[i];
-            sum+=  A[j];
-            ans = Math.min(ans,sum);
+            sum-=A[i];
+            sum+=A[j];
+            ans = Math.max(ans,sum);
             i--;j--;
         }
         return ans;

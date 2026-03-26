@@ -2,9 +2,10 @@ package CLASS.DSA_MODULE_1.DSA_Introduction_to_Arrays;
 
 public class Linear_Search_Multiple_Occurences {
     public static int solve(int[]A,int B){
-        int count  = 0, n = A.length;
-        for(int i = 0; i < n; i++){
-            if(A[i] == B){
+        int n = A.length;
+        int count = 0;
+        for (int i = 0; i < n; i++) {
+            if(A[i]==B){
                 count++;
             }
         }

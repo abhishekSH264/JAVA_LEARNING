@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class sum_of_odd_index_in_a_range {
     public static int[] bruteforce(int[] A, int[][] Q) {
+        int n = A.length;
         int m = Q.length;
-        int[] arr = new int[m];
-
+        int[] res = new int[m];
         for (int i = 0; i < m; i++) {
             int start = Q[i][0];
             int end = Q[i][1];
@@ -16,15 +16,14 @@ public class sum_of_odd_index_in_a_range {
                     sum += A[j];
                 }
             }
-            arr[i] = sum;
+            res[i] = sum;
         }
-        return arr;
+        return res;
     }
 
     public static int[] solve(int[] A, int[][] Q) {
         int n = A.length;
         int m = Q.length;
-
         int[] psum = new int[n];
         psum[0] = 0;
         for (int i = 1; i < n; i++) {
@@ -34,17 +33,17 @@ public class sum_of_odd_index_in_a_range {
                 psum[i] = psum[i - 1];
             }
         }
-        int[] arr = new int[m];
+        int[] res = new int[m];
         for (int i = 0; i < m; i++) {
             int start = Q[i][0];
             int end = Q[i][1];
-            if(start == 0){
-                arr[i] = psum[end];
+            if(start ==0){
+                res[i] = psum[end];
             }else{
-                arr[i] = psum[end] - psum[start-1];
+                res[i] = psum[end] - psum[start-1];
             }
         }
-        return arr;
+        return res;
     }
     public static void main(String[] args) {
         int[] A = {2, 4, 6, 8, 10};

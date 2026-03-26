@@ -2,16 +2,17 @@ package CLASS.DSA_MODULE_1.DSA_Strings;
 
 public class String_operations {
     public static String solve(String s) {
-        s = s + s;
+        s += s;
         int n = s.length();
-        StringBuilder sb = new StringBuilder();
         String vowels = "aeiou";
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < n; i++) {
-            if(s.charAt(i)>='a'&&s.charAt(i)<='z'){
-                if(vowels.indexOf(s.charAt(i))>=0){
+            char ch = s.charAt(i);
+            if(ch>='a'&&ch<='z'){
+                if(vowels.indexOf(ch)>=0){
                     sb.append("#");
                 }else{
-                    sb.append(s.charAt(i));
+                    sb.append(ch);
                 }
             }
         }

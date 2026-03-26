@@ -2,31 +2,28 @@ package CLASS.DSA_MODULE_1.DSA_Arrays_Carry_Forward_Subarrays;
 
 public class Best_Time_to_Buy_and_Sell_Stocks_I {
 
-    public static int bruteforce(int[] A) {
+    public static int bruteforce(int[] A){
         int n = A.length;
-        int ans = Integer.MIN_VALUE;
-        for (int i = 0; i < n; i++) {
+        int sum = 0;
+        for(int i = 0 ; i < n; i ++){
             int max = A[i];
-            for(int j = i +1; j < n; j++){
+            for(int j = i+1; j < n; j++){
                 if(A[j] > max){
                     max = A[j];
                 }
             }
-            ans = Math.max(ans,max-A[i]);
+            sum = Math.max(sum,max - A[i]);
         }
-        return ans;
+        return sum;
     }
     public static int solve(int[]A){
         int n = A.length;
-        if(n==0||n==1){
-            return 0;
-        }
         int min = A[0];
-        int ans = Integer.MIN_VALUE;
-        for(int i = 1; i < n; i++){
+        int ans = 0;
+        for(int i = 1; i < n ; i ++){
             int profit = A[i] - min;
             ans = Math.max(ans,profit);
-            if(A[i] < min){
+            if(A[i] <  min){
                 min = A[i];
             }
         }

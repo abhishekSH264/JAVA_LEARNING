@@ -1,20 +1,11 @@
 package CLASS.DSA_MODULE_1.DSA_Bit_Manupulations;
 
 public class Binary_Palindrome_via_String {
-    public static String toBinary(int n) {
-        int x = n;
-        StringBuilder binary = new StringBuilder();
-        while (x != 0) {
-            binary.append(x % 2);
-            x /= 2;
-        }
-        binary.reverse();
-        return binary.toString();
-    }
     public static boolean isPalindrome(String s){
         int n = s.length();
-        int i = 0, j = n-1;
-        while (i < j){
+        int i = 0;
+        int j = n-1;
+        while(i < j){
             if(s.charAt(i)!=s.charAt(j)){
                 return false;
             }
@@ -22,12 +13,20 @@ public class Binary_Palindrome_via_String {
         }
         return true;
     }
-    public static boolean solve(int n){
-        String binary = toBinary(n);
-        return isPalindrome(binary);
+    public static String decimalToBinary(int n){
+        if(n==0){
+            return "0";
+        }
+        StringBuilder sb = new StringBuilder();
+        while(n > 0){
+            sb.append(n%2);
+            n/=2;
+        }
+        sb.reverse();
+        return sb.toString();
     }
     public static void main(String[] args){
         int n = 15;
-        System.out.println(solve(n));
+        System.out.println(isPalindrome(decimalToBinary(n)));
     }
 }

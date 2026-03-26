@@ -3,8 +3,9 @@ package CLASS.DSA_MODULE_1.DSA_Strings;
 public class Isalnum {
     public static int solve(char[] A) {
         int n = A.length;
-        for (int i = 0; i < n; i++) {
-            if(!((A[i]>='A'&&A[i]<='Z')||(A[i]>='a'&&A[i]<='z')||(A[i]>='0'&&A[i]<='9'))){
+        for(int i = 0 ; i < n; i++){
+            char ch = A[i];
+            if(!(ch>='A'&&ch<='Z'||ch>='a'&&ch<='z'||ch>='0'&&ch<='9')){
                 return 0;
             }
         }

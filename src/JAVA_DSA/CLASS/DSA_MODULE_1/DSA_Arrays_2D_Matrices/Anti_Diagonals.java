@@ -8,31 +8,27 @@ public class Anti_Diagonals {
         int m = A[0].length;
         int row = i;
         int col = j;
-        int[] arr = new int[n];
-        int K = 0;
-        while (row < n && col >= 0) {
-            arr[K] = A[row][col];
-            K++;
-            row++;
-            col--;
+        int[]res = new int[n];
+        int k = 0;
+        while(row < n && col >= 0){
+            res[k++] = A[row][col];
+            row++;col--;
         }
-        return arr;
+        return res;
     }
 
     public static int[][] solve(int[][] A) {
         int n = A.length;
         int m = A[0].length;
-        int[][] arr = new int[n + n - 1][n];
-        int K = 0;
-        for (int j = 0; j < m; j++) {
-            arr[K] = antiDiagonal(A, 0, j);
-            K++;
+        int[][] res = new int[n+m-1][];
+        int k = 0;
+        for(int i = 0 ; i < n; i++){
+            res[k++] = antiDiagonal(A,0,i);
         }
-        for (int i = 1; i < n; i++) {
-            arr[K] = antiDiagonal(A,i,m-1);
-            K++;
+        for(int i = 1; i < n; i++){
+            res[k++] = antiDiagonal(A,i,n-1);
         }
-        return arr;
+        return res;
     }
 
     public static void main(String[] args) {

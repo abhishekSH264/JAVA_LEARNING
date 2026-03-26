@@ -2,10 +2,9 @@ package CLASS.DSA_MODULE_1.DSA_Introduction_to_Arrays;
 
 public class Second_Largest {
     public static int solve(int[]A){
-        int max = -1;
-        int secondMax = -1;
         int n = A.length;
-
+        int max = Integer.MIN_VALUE;
+        int secondMax = Integer.MIN_VALUE;
         for(int i : A){
             if(i > max){
                 secondMax = max;

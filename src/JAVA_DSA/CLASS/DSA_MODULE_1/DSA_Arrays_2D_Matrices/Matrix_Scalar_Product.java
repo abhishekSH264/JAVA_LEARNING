@@ -5,10 +5,9 @@ import java.util.Arrays;
 public class Matrix_Scalar_Product {
     public static int[][] solve(int[][] A, int B) {
         int n = A.length;
-
         for (int i = 0; i < n; i++) {
             int m = A[i].length;
-            for (int j = 0; j < m; j++) {
+            for(int j = 0; j < m; j++){
                 A[i][j] = A[i][j]*B;
             }
         }

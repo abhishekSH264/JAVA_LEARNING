@@ -7,7 +7,7 @@ public class Counting_Subarrays_Easy {
         int count = 0;
         for (int i = 0; i < n; i++) {
             int sum = 0;
-            for(int j = i; j < n; j++){
+            for (int j = i; j < n; j++) {
                 sum+=A[j];
                 if(sum < B){
                     count++;

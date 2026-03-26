@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Kth_Smallest_Element {
     public static int solve(int[]A,int B){
         Arrays.sort(A);
-        return A[B-1];
+        return  A[B-1];
     }
 
     public static void main(String[] args) {

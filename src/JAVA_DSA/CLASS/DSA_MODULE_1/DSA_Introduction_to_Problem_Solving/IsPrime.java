@@ -3,10 +3,10 @@ package CLASS.DSA_MODULE_1.DSA_Introduction_to_Problem_Solving;
 import java.util.Scanner;
 
 public class IsPrime {
-    public static int factor(int n){
+    public static int factors(int n) {
         int count = 0;
-        for(int i=1;i*i<=n;i++){
-            if(n%i==0){
+        for (int i = 1; i * i <= n; i++) {
+            if (n % i == 0) {
                 if(i==n/i){
                     count+=1;
                 }else{
@@ -16,8 +16,9 @@ public class IsPrime {
         }
         return count;
     }
-    public static int solve(int A){
-        if(factor(A)==2){
+
+    public static int isPrime(int n) {
+        if(factors(n)==2){
             return 1;
         }
         return 0;
@@ -25,6 +26,6 @@ public class IsPrime {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        System.out.println(solve(n));
+        System.out.println(isPrime(n));
     }
 }
