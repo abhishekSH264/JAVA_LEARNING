@@ -1,36 +1,43 @@
 package STRIVERS.BINARY_SEARCH.Binary_Search_On_Answers;
 
 public class Koko_Eating_Bananas {
-    public static boolean isPossible(int[]A,int x,int h){
-        int ans = 0;
+    public static boolean ispossible(int[] A, int x, int H) {
         int n = A.length;
-        for(int i = 0; i < n ; i++){
-            ans += (int)Math.ceil((double)A[i] / x);
+        int sum = 0;
+
+        for (int i = 0; i < n; i++) {
+            sum+=(int)Math.ceil((double)A[i] / x);
         }
-        return ans <= h;
+        return sum <= H;
     }
-    public static int bruteforce(int[]A,int h){
+
+    public static int bruteforce(int[] A, int H) {
+        int n = A.length;
         int max = Integer.MIN_VALUE;
-        for(int i : A){
-            if(i > max) max = i;
+        for (int i : A) {
+            if (i > max) max = i;
         }
-        for(int i = 1; i <= max; i++){
-            if(isPossible(A,i,h)){
+
+        for (int i = 1; i <= max; i++) {
+            if (ispossible(A, i, H)) {
                 return i;
             }
         }
-        return -1;
+        return max;
     }
-    public static int solve(int[]A,int h){
+    public static int solve(int[]A,int K){
         int n = A.length;
         int max = Integer.MIN_VALUE;
+
         for(int i : A){
             if(i > max) max = i;
         }
-        int start = 1,end = max,ans = -1;
+        int start = 1, end = max;
+        int ans = -1;
         while (start <= end){
             int mid = start + (end - start) / 2;
-            if(isPossible(A,mid,h)){
+
+            if(ispossible(A,mid,K)){
                 ans = mid;
                 end = mid-1;
             }else{

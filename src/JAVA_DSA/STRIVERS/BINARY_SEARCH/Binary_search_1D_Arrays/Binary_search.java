@@ -1,10 +1,10 @@
 package STRIVERS.BINARY_SEARCH.Binary_search_1D_Arrays;
 
 public class Binary_search {
-    public static int bruteforce(int[] A, int K) {
+    public static int bruteforce(int[]A,int x){
         int n = A.length;
-        for (int i = 0; i < n; i++) {
-            if(A[i]==K){
+        for(int i = 0; i < n; i++){
+            if(A[i]==x){
                 return i;
             }
         }
@@ -13,14 +13,15 @@ public class Binary_search {
     public static int solve(int[]A,int K){
         int n = A.length;
         int start = 0,end = n-1;
-        while(start <= end){
+
+        while (start <= end){
             int mid = start + (end - start) / 2;
-            if(A[mid] == K){
+            if(A[mid]==K){
                 return mid;
             }else if(A[mid] < K){
                 start = mid+1;
-            }else{
-                end = mid - 1;
+            }else {
+                end = mid-1;
             }
         }
         return -1;

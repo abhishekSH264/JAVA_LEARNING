@@ -2,53 +2,53 @@ package CLASS.DSA_MODULE_1.DSA_Interview_Problems_1;
 
 //Maxconsecutive one by replacing and Max number of me se min ko return karna hai
 public class Max_Consecutive_ones_swapping {
-    public static int maxConsecutive(String A) {
-        int n = A.length();
-        int totalones = 0;
+    public static int longestConsecutive(String s) {
+        int n = s.length();
+        int ans = Integer.MIN_VALUE;
+        int totalOnes = 0;
         for (int i = 0; i < n; i++) {
-            if(A.charAt(i)=='1'){
-                totalones++;
+            if (s.charAt(i) == '1') {
+                totalOnes++;
             }
         }
-        if (totalones == n) {
-            return n;
+        if (totalOnes == n) {
+            return totalOnes;
         }
-        int ans = 0;
         for (int i = 0; i < n; i++) {
-            if (A.charAt(i) == '0') {
-                int l = 0;
-                int left = i - 1;
-                while (left >= 0 && A.charAt(left) == '1') {
-                    l++;
-                    left--;
+            char ch = s.charAt(i);
+            if (ch == '0') {
+                int l = i - 1;
+                int left = 0;
+                while (l >= 0 && s.charAt(l) == '1') {
+                    left++;
+                    l--;
                 }
-                int r = 0;
-                int right = i + 1;
-                while (right < n &&A.charAt(right) == '1') {
-                    r++;
+                int r = i + 1;
+                int right = 0;
+                while (r < n && s.charAt(r) == '1') {
                     right++;
+                    r++;
                 }
-                int count = l + r + 1;
-                ans = Math.max(ans, count);
+                int sum = left + right + 1;
+                ans = Math.max(ans, sum);
             }
         }
         return ans;
     }
 
-    public static int solve(String A) {
-        int n = A.length();
-        int totalones = 0;
+    public static int solve(String s) {
+        int n = s.length();
+        int totalOnes = 0;
         for (int i = 0; i < n; i++) {
-            if(A.charAt(i)=='1'){
-                totalones++;
+            if (s.charAt(i) == '1'){
+                totalOnes++;
             }
         }
-        int maxConsecutive = maxConsecutive(A);
-        return Math.min(totalones, maxConsecutive);
+        return Math.min(totalOnes,longestConsecutive(s));
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         String s = "111011101";
-        System.out.println(solve(s));
+        System.out.println(longestConsecutive(s));
     }
 }

@@ -4,14 +4,14 @@ import java.util.Arrays;
 
 public class Time_to_equality {
     public static int solve(int[] A){
-        int n = A.length;
         int max = Integer.MIN_VALUE;
         for(int i : A){
             if(i > max) max = i;
         }
+        System.out.println(max);
         int sum = 0;
         for(int i : A){
-            sum+= max - i;
+           sum+= max - i;
         }
         return sum;
     }

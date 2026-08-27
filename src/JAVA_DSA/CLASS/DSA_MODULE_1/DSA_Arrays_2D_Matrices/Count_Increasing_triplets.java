@@ -7,7 +7,9 @@ public class Count_Increasing_triplets {
         for (int j = 0; j < n; j++) {
             int left = 0;
             for (int i = 0; i < j; i++) {
-                if (A[i] < A[j]) left++;
+                if (A[i] < A[j]) {
+                    left++;
+                }
             }
             int right = 0;
             for (int k = j + 1; k < n; k++) {

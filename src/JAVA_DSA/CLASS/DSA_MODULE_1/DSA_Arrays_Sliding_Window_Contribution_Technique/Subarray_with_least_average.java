@@ -1,80 +1,144 @@
 package CLASS.DSA_MODULE_1.DSA_Arrays_Sliding_Window_Contribution_Technique;
 
-public class Subarray_with_least_average {
+import java.util.function.DoubleUnaryOperator;
 
+public class Subarray_with_least_average {
     public static int bruteforce(int[] A, int B) {
         int n = A.length;
-        double ans = Double.MAX_VALUE;
-        int start = 0, end = B - 1;
-        int index = -1;
-        while (end < n) {
+        int ans = Integer.MAX_VALUE;
+        int idx = -1;
+        for (int i = 0; i <= n - B; i++) {
             int sum = 0;
-            for (int i = start; i <= end; i++) {
-                sum+= A[i];
+            for (int j = i; j < i + B; j++) {
+                sum += A[j];
             }
-            double average = (double)sum / B;
-            if(average < ans){
-                ans = average;
-                index = start;
+            if (sum < ans) {
+                ans = sum;
+                idx = i;
             }
-            start++;end++;
         }
-        return index;
+        return idx;
     }
-    public static int solve(int[]A,int B){
+
+    public static int brute1(int[] A, int B) {
         int n = A.length;
         double ans = Double.MAX_VALUE;
-        long sum = 0;
-        int index = -1;
-        for(int i = 0; i < B; i ++){
+        int idx = -1;
+        for (int i = 0; i <= n - B; i++) {
+            int sum = 0;
+            for (int j = i; j < i + B; j++) {
+                sum += A[j];
+            }
+            double avg = (double) sum / B;
+            if (avg < ans) {
+                ans = avg;
+                idx = i;
+            }
+        }
+        return idx;
+    }
+
+    //Using the Sliding window two pointers approach
+    public static int solve(int[] A, int B) {
+        int n = A.length;
+        int ans = Integer.MAX_VALUE;
+        int idx = -1;
+        int i = 0, j = 0;
+        int sum = 0;
+        while (j < n) {
+            sum += A[j];
+            int len = j - i + 1;
+            if (len < B) {
+                j++;
+            } else if (len == B) {
+                if (sum < ans) {
+                    ans = sum;
+                    idx = i;
+                }
+                sum -= A[i];
+                i++;
+                j++;
+            }
+        }
+        return idx;
+    }
+
+    public static int solve1(int[] A, int B) {
+        int n = A.length;
+        double ans = Double.MAX_VALUE;
+        int idx = -1;
+        int sum = 0;
+        int i = 0, j = 0;
+        while (j < n) {
+            sum += A[j];
+            int len = j - i + 1;
+            if (len < B) {
+                j++;
+            } else if (len == B) {
+                double avg = (double) sum / B;
+                if (avg < ans) {
+                    ans = avg;
+                    idx = i;
+                }
+                sum -= A[i];
+                i++;
+                j++;
+            }
+        }
+        return idx;
+    }
+
+    //Using the Sliding window Fixed Size Approach
+    public static int solve2(int[] A, int B) {
+        int n = A.length;
+        int sum = 0;
+        for (int i = 0; i < B; i++) {
             sum += A[i];
         }
-        double average = (double) sum / B;
-        if(average < ans){
-            ans = average;
-            index = 0;
-        }
-        int start = 1,end = B;
-        while(end < n){
-            sum = sum - A[start-1] + A[end];
-            average = (double)sum / B;
-            if(average < ans){
-                ans = average;
-                index = start;
-            }
-            start++;end++;
-        }
-        return index;
-    }
-    public static int solve2(int[]A,int B){
-        int n = A.length;
-        long sum = 0;
-        long ans = Long.MAX_VALUE;
-        int index = -1;
-        for(int i = 0 ; i < B; i ++){
-            sum+=A[i];
-        }
-        if(sum < ans){
-            ans = sum;
-            index = 0;
-        }
-        int start = 1,end = B;
-        while(end < n){
-            sum = sum - A[start-1] + A[end];
-            if(sum < ans){
+        int ans = sum;
+        int idx = 0;
+        int start = 1, end = B;
+        while (end < n) {
+            sum = sum - A[start - 1] + A[end];
+            if (sum < ans) {
                 ans = sum;
-                index = start;
+                idx = start;
+            }
+            start++;
+            end++;
+        }
+        return idx;
+    }
+
+    public static int solve3(int[] A, int B) {
+        int n = A.length;
+        int sum = 0;
+        for (int i = 0; i < B; i++) {
+            sum += A[i];
+        }
+        double ans = (double) sum / B;
+        int idx = -1;
+        int start = 1, end = B;
+        while (end < n){
+            sum = sum - A[start - 1] + A[end];
+            double avg = (double) sum / B;
+            if(avg < ans){
+                ans = avg;
+                idx = start;
             }
             start++;end++;
         }
-        return index;
+        return idx;
     }
 
     public static void main(String[] args) {
         int[] A = {3, 7, 90, 20, 10, 50, 40};
         int B = 3;
         System.out.println(bruteforce(A, B));
-        System.out.println(solve(A,B));
-        System.out.println(solve2(A,B));
+        System.out.println(brute1(A, B));
+        System.out.println(solve(A, B));
+        System.out.println(solve1(A, B));
+        System.out.println(solve2(A, B));
+        System.out.println(solve3(A,B));
     }
 }

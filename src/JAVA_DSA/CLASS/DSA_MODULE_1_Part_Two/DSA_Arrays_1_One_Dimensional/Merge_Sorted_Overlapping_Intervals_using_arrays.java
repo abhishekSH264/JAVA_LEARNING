@@ -6,23 +6,25 @@ import java.util.Arrays;
 public class Merge_Sorted_Overlapping_Intervals_using_arrays {
     public static int[][] solve(int[][] A) {
         int n = A.length;
-        ArrayList<int[]> result = new ArrayList<>();
+        ArrayList<int[]> al = new ArrayList<>();
+
         int start = A[0][0];
         int end = A[0][1];
-        for (int i = 0; i < n; i++) {
+
+        for (int i = 1; i < n; i++) {
             int curStart = A[i][0];
             int curEnd = A[i][1];
             if(end >= curStart){
-                start = Math.min(start,curStart);
                 end = Math.max(end,curEnd);
+                start = Math.min(start,curStart);
             }else{
-                result.add(new int[]{start,end});
+                al.add(new int[]{start,end});
                 start = curStart;
                 end = curEnd;
             }
         }
-        result.add(new int[]{start,end});
-        return result.toArray(new int[result.size()][]);
+        al.add(new int[]{start,end});
+        return al.toArray(new int[al.size()][]);
     }
 
     public static void main(String[] args) {

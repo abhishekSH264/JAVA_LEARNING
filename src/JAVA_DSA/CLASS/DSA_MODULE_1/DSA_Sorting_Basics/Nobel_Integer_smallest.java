@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Nobel_Integer_smallest {
     public static int bruteforce(int[] A) {
         int n = A.length;
-        int nobelCount = 0;
+        int ans = 0;
 
         for (int i = 0; i < n; i++) {
             int count = 0;
@@ -14,22 +14,19 @@ public class Nobel_Integer_smallest {
                     count++;
                 }
             }
-            if (count == A[i]) {
-                nobelCount++;
+            if (A[i] == count) {
+                ans++;
             }
         }
-        return nobelCount;
+        return ans;
     }
 
     public static int solve(int[] A) {
         int n = A.length;
         Arrays.sort(A);
-
         int count = 0;
         for (int i = 0; i < n; i++) {
-            if(i==A[i]){
-                count++;
-            }
+            if(i == A[i]) count++;
         }
         return count;
     }

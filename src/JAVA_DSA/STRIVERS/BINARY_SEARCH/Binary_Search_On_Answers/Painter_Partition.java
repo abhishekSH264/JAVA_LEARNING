@@ -7,48 +7,51 @@ public class Painter_Partition {
         int n = A.length;
         int max = Integer.MIN_VALUE;
         int sum = 0;
+
         for (int i : A) {
             if (i > max) max = i;
             sum += i;
         }
-        if (K == 1) {
+        if(K==1) {
             return sum;
         }
         for (int i = max; i <= sum; i++) {
-            if (isPossible(A, i, K)) {
+            if(isPossible(A,i,K)){
                 return i;
             }
         }
-        return -1;
+        return max;
     }
-
-    public static boolean isPossible(int[] A, int x, int K) {
+    public static boolean isPossible(int[]A,int x,int K){
         int n = A.length;
-        int painter = 1;
+        int need = 1;
         int sum = 0;
-        for (int i = 0; i < n; i++) {
+
+        for(int i = 0; i < n; i ++){
             if(sum + A[i] > x){
-                painter++;
+                need++;
                 sum = A[i];
             }else{
-                sum += A[i];
+                sum+=A[i];
             }
         }
-        return painter <= K;
+        return need <= K;
     }
     public static int solve(int[]A,int K){
         int n = A.length;
         int max = Integer.MIN_VALUE;
         int sum = 0;
-        for(int i : A){
-            if(i > max) max = i;
+
+        for (int i : A) {
+            if (i > max) max = i;
             sum += i;
         }
-        if(K==1){
+        if(K==1) {
             return sum;
         }
-        int start = max,end = sum,ans = -1;
-        while (start<= end){
+
+        int start = max,end = sum, ans = -1;
+        while (start <= end){
             int mid = start + (end - start) / 2;
             if(isPossible(A,mid,K)){
                 ans = mid;
@@ -62,7 +65,7 @@ public class Painter_Partition {
     public static void main(String[] args) {
         int[] A = {10, 20, 30, 40};
         int K = 2;
-        System.out.println(brutforce(A,K));
-        System.out.println(solve(A,K));
+        System.out.println(brutforce(A, K));
+        System.out.println(solve(A, K));
     }
 }

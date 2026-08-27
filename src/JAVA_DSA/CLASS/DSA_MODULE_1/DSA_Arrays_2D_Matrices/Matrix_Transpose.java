@@ -3,20 +3,21 @@ package CLASS.DSA_MODULE_1.DSA_Arrays_2D_Matrices;
 import java.util.Arrays;
 
 public class Matrix_Transpose {
-    public static int[][] transpose(int[][] A) {
+    public static int[][] solve(int[][] A) {
         int n = A.length;
-        int m = A[0].length;
-        int[][] ans = new int[m][n];
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                ans[j][i] = A[i][j];
+            int m = A[i].length;
+            for (int j = i + 1; j < m; j++) {
+                int temp = A[i][j];
+                A[i][j] = A[j][i];
+                A[j][i] = temp;
             }
         }
-        return ans;
+        return A;
     }
 
     public static void main(String[] args) {
         int[][] A = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-        System.out.println(Arrays.deepToString(transpose(A)));
+        System.out.println(Arrays.deepToString(solve(A)));
     }
 }

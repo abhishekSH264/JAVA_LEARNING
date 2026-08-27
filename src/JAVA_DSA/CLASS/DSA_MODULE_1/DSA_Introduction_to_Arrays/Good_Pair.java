@@ -3,49 +3,50 @@ package CLASS.DSA_MODULE_1.DSA_Introduction_to_Arrays;
 import java.util.HashMap;
 
 public class Good_Pair {
-    public static int solve(int[] A,int B) {
+    public static int bruteforce(int[] A, int K) {
         int n = A.length;
         for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                if(A[i]+A[j]==B){
+            for (int j = 0; j < n; j++) {
+                if (A[i] + A[j] == K) {
                     return 1;
                 }
             }
         }
         return 0;
     }
-    public static int solve2(int[] A,int B) {
-        int n = A.length;
-        HashMap<Integer,Integer> map = new HashMap<>();
-        for(int i = 0 ; i < n ; i ++){
-            int required = B - A[i];
-            if(map.containsKey(required)){
+
+    public static int better(int[] A, int K) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i : A) {
+            int target = K - i;
+            if (map.containsKey(target)) {
                 return 1;
             }
-            map.put(A[i],i);
+            map.put(i, 1);
         }
         return 0;
     }
-    public static int solve3(int[] A,int B) {
+    public static int solve(int[] A, int K) {
         int n = A.length;
-        int i = 0, j = n-1;
-        while(i<j){
-            int sum = A[i] + A[j];
-            if(sum==B){
+        int start = 0, end = n - 1;
+        while (start < end) {
+            int sum = A[start] + A[end];
+            if (sum == K) {
                 return 1;
-            }else if(sum<B){
-                i++;
-            }else{
-                j--;
+            } else if (sum < K) {
+                start++;
+            } else {
+                end--;
             }
         }
         return 0;
     }
     public static void main(String[] args) {
         int[] A = {1, 2, 3, 4};
-        int B = 7;
-        System.out.println(solve(A,B));
-        System.out.println(solve2(A,B));
-        System.out.println(solve3(A,B));
+        int K = 7;
+        System.out.println(bruteforce(A, K));
+        System.out.println(better(A, K));
+        System.out.println(solve(A,K));
+
     }
 }

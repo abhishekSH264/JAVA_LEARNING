@@ -3,9 +3,10 @@ package CLASS.DSA_MODULE_1.DSA_Arrays_2D_Matrices;
 public class Minor_Diagonal_Sum {
     public static int solve(int[][]A){
         int n = A.length;
+        int m = A[0].length;
         int sum = 0;
-        int i = 0,j = n-1;
-        while(i < n && j>=0){
+        int i = 0, j = m-1;
+        while (i < n && j >= 0){
             sum+=A[i][j];
             i++;j--;
         }

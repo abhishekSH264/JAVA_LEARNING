@@ -1,30 +1,40 @@
 package STRIVERS.BINARY_SEARCH.Binary_Search_On_Answers;
 
 public class Find_the_Smallest_Divisor_Given_a_Threshold {
-    public static int bruteforce(int[] A, int k) {
+    public static int bruteforce(int[] A, int K) {
+        int max = Integer.MIN_VALUE;
+
+        for (int i : A) {
+            if (i > max) max = i;
+        }
         int n = A.length;
         for (int i = 0; i < n; i++) {
-            if (isPossible(A, i, k)) {
+            if (isPossible(A, i, K)) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static boolean isPossible(int[] A, int x, int k) {
+    public static boolean isPossible(int[] A, int x, int K) {
         int n = A.length;
         int sum = 0;
+
         for (int i = 0; i < n; i++) {
-            sum += (int) Math.ceil((double)A[i] / x);
+            sum +=(int)Math.ceil((double)A[i] / x);
         }
-        return sum <= k;
+        return sum <= K;
     }
-    public static int solve(int[]A,int k){
-        int n = A.length;
-        int start = 0,end = n-1,ans = -1;
+    public static int solve(int[]A,int K){
+        int max = Integer.MIN_VALUE;
+        for(int i : A){
+            if(i > max) max = i;
+        }
+        int ans = -1;
+        int start = 1, end = max;
         while (start <= end){
             int mid = start + (end - start) / 2;
-            if(isPossible(A,mid,k)){
+            if(isPossible(A,mid,K)){
                 ans = mid;
                 end = mid-1;
             }else{

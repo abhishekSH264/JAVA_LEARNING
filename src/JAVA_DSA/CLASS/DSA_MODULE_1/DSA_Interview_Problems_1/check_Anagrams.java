@@ -3,18 +3,33 @@ package CLASS.DSA_MODULE_1.DSA_Interview_Problems_1;
 import java.util.Arrays;
 
 public class check_Anagrams {
-    public static int solve(String A,String B){
-        int n1 = A.length();
-        int n2 = B.length();
-        if(n1!=n2){
+    public static int bruteForce(String A, String B) {
+        if (A.length() != B.length()) {
             return 0;
         }
-        char[] s1 = A.toCharArray();
-        char[] s2 = B.toCharArray();
-        Arrays.sort(s1);
-        Arrays.sort(s2);
-        for(int i = 0; i < s1.length;i++){
-            if(s1[i]!=s2[i]){
+        char[] a = A.toCharArray();
+        char[] b = B.toCharArray();
+        Arrays.sort(a);
+        Arrays.sort(b);
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] != b[i]) {
+                return 0;
+            }
+        }
+        return 1;
+    }
+
+    public static int solve(String A, String B) {
+        if (A.length() != B.length()) {
+            return 0;
+        }
+        int[] freq = new int[26];
+        for (int i = 0; i < A.length(); i++) {
+            freq[A.charAt(i) - 'a']++;
+            freq[B.charAt(i) - 'a']--;
+        }
+        for (int i : freq) {
+            if(i!=0){
                 return 0;
             }
         }
@@ -24,6 +39,7 @@ public class check_Anagrams {
     public static void main(String[] args) {
         String A = "secure";
         String B = "rescue";
+        System.out.println(bruteForce(A, B));
         System.out.println(solve(A,B));
     }
 }

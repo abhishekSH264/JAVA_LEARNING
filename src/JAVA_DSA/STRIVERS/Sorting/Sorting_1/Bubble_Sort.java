@@ -3,9 +3,9 @@ package STRIVERS.Sorting.Sorting_1;
 import java.util.Arrays;
 
 public class Bubble_Sort {
-    public static int[] bubbleSort(int[] A) {
+    public static int[] solve(int[]A){
         int n = A.length;
-        for (int i = n - 1; i > 0; i--){
+        for(int i = n-1; i > 0; i--){
             boolean swapped = false;
             for(int j = 0; j < i; j++){
                 if(A[j] > A[j+1]){
@@ -15,7 +15,7 @@ public class Bubble_Sort {
                     swapped = true;
                 }
             }
-            if(!swapped){
+            if (!swapped){
                 break;
             }
         }
@@ -23,6 +23,6 @@ public class Bubble_Sort {
     }
     public static void main(String[] args) {
         int[] A = {5, 4, 3, 2, 1};
-        System.out.println(Arrays.toString(bubbleSort(A)));
+        System.out.println(Arrays.toString(solve(A)));
     }
 }

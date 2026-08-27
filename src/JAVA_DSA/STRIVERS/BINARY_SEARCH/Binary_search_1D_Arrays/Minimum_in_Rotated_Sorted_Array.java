@@ -3,8 +3,8 @@ package STRIVERS.BINARY_SEARCH.Binary_search_1D_Arrays;
 public class Minimum_in_Rotated_Sorted_Array {
     public static int bruteforce(int[]A){
         int n = A.length;
-        for(int i = 1;i < n; i++){
-            if(A[i-1] > A[i]){
+        for(int i = 1 ; i < n; i ++){
+            if(A[i] < A[i-1]){
                 return A[i];
             }
         }
@@ -12,7 +12,9 @@ public class Minimum_in_Rotated_Sorted_Array {
     }
     public static int solve(int[]A){
         int n = A.length;
-        int start = 0, end = n-1,ans = Integer.MAX_VALUE;
+        int start = 0, end = n-1;
+        int ans = Integer.MAX_VALUE;
+
         while (start <= end){
             int mid = start + (end - start) / 2;
             if(A[start] <= A[mid]){

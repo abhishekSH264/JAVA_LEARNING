@@ -3,34 +3,30 @@ package CLASS.DSA_MODULE_1.DSA_Arrays_2D_Matrices;
 import java.util.Arrays;
 
 public class Anti_Diagonals {
-    public static int[] antiDiagonal(int[][] A, int i, int j) {
+    public static int[] antiDiagonals(int[][] A, int i, int j) {
         int n = A.length;
-        int m = A[0].length;
         int row = i;
         int col = j;
-        int[]res = new int[n];
-        int k = 0;
-        while(row < n && col >= 0){
-            res[k++] = A[row][col];
+        int[] ans = new int[n];
+        int K = 0;
+        while (row < n && col >= 0) {
+            ans[K++] = A[row][col];
             row++;col--;
         }
-        return res;
+        return ans;
     }
-
-    public static int[][] solve(int[][] A) {
+    public static int[][] solve(int[][]A){
         int n = A.length;
-        int m = A[0].length;
-        int[][] res = new int[n+m-1][];
-        int k = 0;
-        for(int i = 0 ; i < n; i++){
-            res[k++] = antiDiagonal(A,0,i);
+        int[][] ans = new int[(n+n) - 1][n];
+        int K = 0;
+        for(int j = 0; j < n; j++){
+            ans[K++] = antiDiagonals(A,0,j);
         }
         for(int i = 1; i < n; i++){
-            res[k++] = antiDiagonal(A,i,n-1);
+            ans[K++] = antiDiagonals(A,i,n-1);
         }
-        return res;
+        return ans;
     }
-
     public static void main(String[] args) {
         int[][] A = {{1, 2, 3},
                      {4, 5, 6},

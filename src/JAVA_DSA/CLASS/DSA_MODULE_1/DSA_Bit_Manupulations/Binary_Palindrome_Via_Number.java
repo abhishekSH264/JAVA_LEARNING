@@ -17,7 +17,7 @@ public class Binary_Palindrome_Via_Number {
             return 0;
         }
         StringBuilder sb = new StringBuilder();
-        while (n > 0) {
+        while (n != 0) {
             sb.append(n % 2);
             n /= 2;
         }
@@ -25,21 +25,24 @@ public class Binary_Palindrome_Via_Number {
         return convert(sb.toString());
     }
 
+    //1011
     public static boolean isPalindrome(int n) {
-        int x = n;
+        int num = n;
         int rev = 0;
-        while (x > 0) {
-            int digit = x % 10;
-            if (rev > Integer.MAX_VALUE / 10 || rev == Integer.MAX_VALUE / 10 && digit > 7) {
+        while (num != 0) {
+            int digit = num % 10;
+            if(rev > Integer.MAX_VALUE / 10 || rev == Integer.MAX_VALUE / 10 && digit > 7){
                 return false;
             }
             rev = rev * 10 + digit;
-            x /= 10;
+            num /= 10;
         }
-        return rev==n;
+        return rev == n;
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         int n = 15;
         System.out.println(isPalindrome(binaryToDecimal(n)));
+        System.out.println(Integer.MAX_VALUE);
     }
 }

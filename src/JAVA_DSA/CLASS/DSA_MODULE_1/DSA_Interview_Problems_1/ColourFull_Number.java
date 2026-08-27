@@ -4,19 +4,17 @@ import java.util.HashSet;
 
 public class ColourFull_Number {
     public static int solve(int A) {
-        String s = String.valueOf(A);
+        String s = Integer.toString(A);
         int n = s.length();
         HashSet<Integer> set = new HashSet<>();
         for (int i = 0; i < n; i++) {
-            int product = 1;
+            int val = 1;
             for (int j = i; j < n; j++) {
-                int digit = s.charAt(j) - '0';
-                product *= digit;
-                if(set.contains(product)){
+                val = val * (s.charAt(j) - '0');
+                if(set.contains(val)){
                     return 0;
-                }else{
-                    set.add(product);
                 }
+                set.add(val);
             }
         }
         return 1;

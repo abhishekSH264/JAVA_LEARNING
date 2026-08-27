@@ -6,42 +6,36 @@ import java.util.Arrays;
 public class Leaders_in_an_array {
     public static int[] bruteforce(int[] A) {
         int n = A.length;
-        ArrayList<Integer> ans = new ArrayList<>();
+        ArrayList<Integer> al = new ArrayList<>();
 
         for (int i = 0; i < n; i++) {
             int max = A[i];
-            for(int j = i+1; j < n; j++){
-                if(A[j] > max){
-                    max = A[j];
-                }
+            for (int j = i + 1; j < n; j++) {
+                max = Math.max(max, A[j]);
             }
-            if(A[i]==max){
-                ans.add(A[i]);
+            if (max == A[i]) {
+                al.add(A[i]);
             }
         }
-        int[] arr = new int[ans.size()];
-        for(int i = 0 ; i < ans.size() ; i++){
-            arr[i] = ans.get(i);
+        int[] arr = new int[al.size()];
+        for (int i = 0; i < al.size(); i++) {
+            arr[i] = al.get(i);
         }
         return arr;
     }
     public static int[] solve(int[] A) {
         int n = A.length;
-        ArrayList<Integer> ans = new ArrayList<>();
-        int max = A[n-1];
-        for(int i = n-1; i >= 0; i--){
-            if(A[i] > max){
-                ans.add(max);
+        int max = Integer.MIN_VALUE;
+        ArrayList<Integer> al = new ArrayList<>();
+        for (int i = n - 1; i >= 0; i--) {
+            if (A[i] > max) {
+                al.add(A[i]);
                 max = A[i];
             }
         }
-        ans.add(max);
-        System.out.println(ans);
-        int[] arr = new int[ans.size()];
-        int k = 0;
-        for(int i = ans.size()-1 ; i >=0 ; i--){
-            arr[k] = ans.get(i);
-            k++;
+        int[] arr = new int[al.size()];
+        for (int i = 0; i < al.size(); i++) {
+            arr[i] = al.get(i);
         }
         return arr;
     }

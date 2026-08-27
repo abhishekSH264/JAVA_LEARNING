@@ -6,13 +6,13 @@ public class Add_the_matrices {
     public static int[][] solve(int[][] A, int[][] B) {
         int n = A.length;
         int m = A[0].length;
-        int[][] res = new int[n][m];
+        int[][] C = new int[n][m];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                res[i][j] = A[i][j] + B[i][j];
+                C[i][j] = A[i][j] + B[i][j];
             }
         }
-        return res;
+        return C;
     }
 
     public static void main(String[] args) {

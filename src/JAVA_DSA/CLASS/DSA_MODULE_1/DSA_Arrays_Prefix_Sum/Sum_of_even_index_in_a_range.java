@@ -3,47 +3,55 @@ package CLASS.DSA_MODULE_1.DSA_Arrays_Prefix_Sum;
 import java.util.Arrays;
 
 public class Sum_of_even_index_in_a_range {
-    public static int[] bruteforce(int[]A,int[][]Q){
+    public static int[] bruteforce(int[] A, int[][] B) {
         int n = A.length;
-        int m = Q.length;
-        int[] res = new int[m];
-        for(int i = 0; i < m; i++){
-            int start = Q[i][0];
-            int end = Q[i][1];
+        int m = B.length;
+
+        int[] ans = new int[m];
+        for (int i = 0; i < m; i++) {
+            int start = B[i][0];
+            int end = B[i][1];
             int sum = 0;
-            for(int j = start; j <= end; j++){
-                if(j%2==0){
-                    sum+=A[j];
+
+            for (int j = start; j <= end; j++) {
+                if (j % 2 == 0) {
+                    sum += A[j];
                 }
             }
-            res[i] = sum;
+            ans[i] = sum;
         }
-        return res;
+        return ans;
     }
-    public static int[] solve(int[]A,int[][]Q){
+
+    public static int[] solve(int[] A, int[][] B) {
         int n = A.length;
-        int m = Q.length;
+        int m = B.length;
+
+        int[] ans = new int[m];
         int[] psum = new int[n];
         psum[0] = A[0];
-        for(int i = 1; i < n; i ++){
-            if(i % 2 ==0){
-                psum[i] = psum[i-1]+A[i];
-            }else{
-                psum[i] = psum[i-1];
+
+        for (int i = 1; i < n; i++) {
+            if (i % 2 == 0) {
+                psum[i] = psum[i - 1] + A[i];
+            } else {
+                psum[i] = psum[i - 1];
             }
         }
-        int[] res = new int[m];
-        for(int i = 0; i < m; i++){
-            int start = Q[i][0];
-            int end = Q[i][1];
-            if(start ==0){
-                res[i] = psum[end];
+
+        for (int i = 0; i < m; i++) {
+            int start = B[i][0];
+            int end = B[i][1];
+
+            if(start == 0){
+                ans[i] = psum[end];
             }else{
-                res[i] = psum[end] - psum[start-1];
+                ans[i] = psum[end] - psum[start-1];
             }
         }
-        return res;
+        return ans;
     }
+
     public static void main(String[] args) {
         //         0  1  2  3  4
         int[] A = {2, 4, 6, 8, 10};

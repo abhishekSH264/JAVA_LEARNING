@@ -1,23 +1,21 @@
 package CLASS.DSA_MODULE_1.DSA_Introduction_to_Problem_Solving;
 
 public class Find_Perfect_Numbers {
-    public static int solve(int n) {
+    public static int solve(int num) {
+        if (num == 1) {
+            return 0;
+        }
         int sum = 0;
-        for (int i = 1; i * i <= n; i++) {
-            if (n % i == 0) {
-                if(i!=n){
-                    sum += i;
-                }
-                int other = n / i;
-                if(other != i && other != n){
-                    sum+=other;
+        for (int i = 1; i * i <= num; i++) {
+            if (num % i == 0) {
+                sum += i;
+                int other = num / i;
+                if (other != i && other != num) {
+                    sum += other;
                 }
             }
         }
-        if(sum==n){
-            return 1;
-        }
-        return 0;
+        return sum == num ? 1 : 0;
     }
 
     public static void main(String[] args) {

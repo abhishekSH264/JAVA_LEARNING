@@ -1,47 +1,53 @@
 package STRIVERS.BINARY_SEARCH.Binary_Search_On_Answers;
 
 public class Minimum_days_to_make_M_bouquets {
-    public static boolean isPossible(int[] A, int x, int m, int k) {
-        int n = A.length;
-        int count = 0;
-        int booke = 0;
-        for (int i = 0; i < n; i++) {
-            if (A[i] <= x) {
-                count++;
-            } else {
-                booke += count / k;
-                count = 0;
-            }
-        }
-        booke += count / k;
-        return booke >= m;
-    }
-    public static int bruteforce(int[] A, int m, int k) {
+    public static int bruteforce(int[] A, int M, int K) {
         int n = A.length;
         int max = Integer.MIN_VALUE;
         int min = Integer.MAX_VALUE;
+
         for (int i : A) {
             if (i > max) max = i;
             if (i < min) min = i;
         }
+
         for (int i = min; i <= max; i++) {
-            if (isPossible(A, i, m, k)) return i;
+            if (isPossible(A, i, M, K)) {
+                return i;
+            }
         }
         return -1;
     }
 
-    public static int solve(int[] A, int m, int k) {
+    public static boolean isPossible(int[] A, int x, int M, int K) {
+        int n = A.length;
+        int count = 0;
+        int booke = 0;
+        for (int i = 0; i < n; i++) {
+            if(A[i] <= x){
+                count++;
+            }else {
+                booke += count / K;
+                count = 0;
+            }
+        }
+        booke += count / K;
+        return booke >= M;
+    }
+    public static int solve(int[]A,int M,int K){
         int n = A.length;
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
-        for (int i : A) {
-            if (i > max) max = i;
-            if (i < min) min = i;
+
+        for(int i : A){
+            if(i > max) max = i;
+            if(i < min) min = i;
         }
         int start = min, end = max, ans = -1;
-        while (start <= end) {
+
+        while (start <= end){
             int mid = start + (end - start) / 2;
-            if(isPossible(A,mid,m,k)){
+            if(isPossible(A,mid,M,K)){
                 ans = mid;
                 end = mid-1;
             }else{

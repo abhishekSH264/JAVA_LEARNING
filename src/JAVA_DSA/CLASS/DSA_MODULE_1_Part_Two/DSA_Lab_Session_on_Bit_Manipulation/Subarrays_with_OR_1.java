@@ -1,26 +1,43 @@
 package CLASS.DSA_MODULE_1_Part_Two.DSA_Lab_Session_on_Bit_Manipulation;
 
 public class Subarrays_with_OR_1 {
-    public static int solve(int[] A) {
+    public static int bruteForce(int[] A) {
         int n = A.length;
-        int totalsubarray = n * (n + 1) / 2;
         int ans = 0;
-        int m = 0;
         for (int i = 0; i < n; i++) {
-            if (A[i] == 0) {
-                m++;
-            } else {
-                ans += m * (m + 1) / 2;
-                m = 0;
+            for (int j = i; j < n; j++) {
+                int a = 0;
+                for (int k = i; k <= j; k++) {
+                    a = a | A[k];
+                }
+                if (a == 1) {
+                    ans++;
+                }
             }
         }
-        ans += m * (m + 1) / 2;
-        return totalsubarray - ans;
+        return ans;
+    }
 
+    public static int solve(int[] A) {
+        int n = A.length;
+        int ans = 0;
+        int ze = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (A[i] == 1) {
+                ans += ze * (ze + 1) / 2;
+                ze = 0;
+            } else {
+                ze++;
+            }
+        }
+        ans += ze * (ze + 1) / 2;
+       return ((n * (n+1) / 2) - ans);
     }
 
     public static void main(String[] args) {
         int[] A = {0, 0, 1, 1, 0};
+        System.out.println(bruteForce(A));
         System.out.println(solve(A));
     }
 }

@@ -1,13 +1,10 @@
 package CLASS.DSA_MODULE_1.DSA_Arrays_Sliding_Window_Contribution_Technique;
 
 public class MaxSubaaraySum {
-    //Extreme Bruteforce
     public static int bruteforce(int A, int B, int[] C) {
-        int n = C.length;
-        int ans = 0;
-
-        for (int i = 0; i < n; i++) {
-            for (int j = i; j < n; j++) {
+        int ans = Integer.MIN_VALUE;
+        for (int i = 0; i < A; i++) {
+            for (int j = i; j < A; j++) {
                 int sum = 0;
                 for (int k = i; k <= j; k++) {
                     sum += C[k];
@@ -20,57 +17,58 @@ public class MaxSubaaraySum {
         return ans;
     }
 
-    public static int betterSolution(int A, int B, int[] C) {
-        int n = C.length;
-        int[] psum = new int[n];
-        psum[0] = C[0];
-        for (int i = 1; i < n; i++) {
-            psum[i] = psum[i - 1] + C[i];
-        }
-        int ans = 0;
-        for (int i = 0; i < n; i++){
-            int sum = 0;
-            for(int j = i; j < n; j++){
-                if(i==0){
-                    sum = psum[j];
-                }else{
-                    sum = psum[j]-psum[i-1];
-                }
-                if(sum<=B){
-                    ans = Math.max(ans, sum);
-                }
-            }
-        }
-        return ans;
-    }
     public static int carryforward(int A, int B, int[] C) {
-        int n = C.length;
-        int ans = 0;
-        for(int i = 0 ; i < n ; i ++){
+        int n = A;
+        int ans = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
             int sum = 0;
-            for(int j = i; j < n; j++){
-                sum+=C[j];
-                if(sum <= B){
+            for (int j = i; j < n; j++) {
+                sum += C[j];
+                if (sum <= B) {
                     ans = Math.max(ans, sum);
                 }
             }
         }
         return ans;
     }
-    public static int solve(int A, int B, int[] C) {
-        int n = C.length;
-        int ans = 0;
-        int left = 0;
+
+    public static int betterSolution(int A, int B, int[] C) {
+        int n = A;
+        int ans = Integer.MIN_VALUE;
+
+        int[] prefix = new int[n];
+        prefix[0] = C[0];
+        for (int i = 1; i < n; i++) {
+            prefix[i] = prefix[i - 1] + C[i];
+        }
+        for (int i = 0; i < n; i++) {
+            int sum = 0;
+            for (int j = i; j < n; j++) {
+                if(i == 0){
+                    sum = prefix[j];
+                }else{
+                    sum = prefix[j] - prefix[i-1];
+                }
+                if(sum <= B){
+                    ans = Math.max(ans,sum);
+                }
+            }
+        }
+        return ans;
+    }
+    public static int solve(int A,int B,int[]C){
+        int n = A;
         int sum = 0;
-        for(int i = 0 ; i < n ; i ++){
-            sum+=C[i];
-            while(sum > B){
-                sum -= C[left];
-                left++;
+        int ans = Integer.MIN_VALUE;
+        int i = 0, j = 0;
+        while (j < n){
+            sum+=C[j];
+            while (sum > B){
+                sum -=C[i];
+                i++;
             }
-            if(sum<=B){
-                ans = Math.max(ans, sum);
-            }
+            ans = Math.max(ans,sum);
+            j++;
         }
         return ans;
     }
@@ -79,8 +77,8 @@ public class MaxSubaaraySum {
         int A = C.length;
         int B = 12;
         System.out.println(bruteforce(A, B, C));
-        System.out.println(carryforward(A,B,C));
-        System.out.println(betterSolution(A,B,C));
-        System.out.println(solve(A,B,C));
+        System.out.println(carryforward(A, B, C));
+        System.out.println(betterSolution(A, B, C));
+        System.out.println(solve(A, B, C));
     }
 }
